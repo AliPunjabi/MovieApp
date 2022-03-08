@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:movieapp/Constants.dart';
+import 'package:movieapp/screens/Detail.dart';
+import 'package:movieapp/services/UpcomingMoviesAPICall.dart';
+import 'package:movieapp/services/UpcomingMoviesModelAPICall2.dart';
 
 class vertical_cards extends StatelessWidget {
   List? movieData;
@@ -15,8 +18,9 @@ class vertical_cards extends StatelessWidget {
         scrollDirection: Axis.vertical,
         itemCount: movieData!.length,
         itemBuilder: (context, index) {
-          final String backdropPath = movieData![index].backdropPath;
-          final String name = movieData![index].originalTitle;
+          final String backdropPath = movieData![index]['backdrop_path'];
+          final String name = movieData![index]['original_title'];
+
           return Container(
               // width: MediaQuery.of(context).size.width * 0.6,
               child: Padding(
@@ -30,14 +34,15 @@ class vertical_cards extends StatelessWidget {
                   height: 180,
                   child: GestureDetector(
                     onTap: () {
-                      /*Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) {
-                          return Detail(movieData![index]);
-                        },
-                      ),
-                    );*/
+                      fetchMovies2();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) {
+                            return Detail(movieData![index]);
+                          },
+                        ),
+                      );
                     },
                     child: Stack(alignment: Alignment.bottomLeft, children: [
                       Container(

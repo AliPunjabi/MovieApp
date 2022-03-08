@@ -5,6 +5,7 @@ import 'package:movieapp/Components/vertical_cards.dart';
 import 'package:movieapp/Constants.dart';
 import 'package:movieapp/screens/MovieSearchScreen.dart';
 import 'package:movieapp/services/UpcomingMoviesAPICall.dart';
+import 'package:movieapp/services/UpcomingMoviesModelAPICall2.dart';
 
 class NestedScreenRoutes {
   static const String root = '/';
@@ -92,12 +93,12 @@ class MovieListScreen extends StatelessWidget {
           elevation: 0.0,
         ),
         body: FutureBuilder(
-          future: fetchMovies(),
+          future: fetchMovies2(),
           builder: (context, AsyncSnapshot snapshot) {
             if (!snapshot.hasData) {
               return Center(child: CircularProgressIndicator());
             } else {
-              return vertical_cards(snapshot.data.results);
+              return vertical_cards(snapshot.data.movies);
             }
           },
         ),
